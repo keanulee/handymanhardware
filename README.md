@@ -30,6 +30,15 @@ rails s
 
 The site should then be accessible at [http://localhost:3000/](http://localhost:3000/).
 
+## Deploy
+
+Assuming you have SSH access to heroku...
+
+```
+git push heroku master
+heroku run rake db:migrate
+```
+
 ## Employee Flow
 
 The employees of Handyman will be expected to be able to directly navigate to URLs to perform certain tasks that are "hidden" to customers. Some of these URLs are listed below:
