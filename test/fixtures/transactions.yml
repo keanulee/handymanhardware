@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyString
+  phone: MyString
+  start_at: 2014-07-03 18:54:15
+  end_at: 2014-07-03 18:54:15
+  delivered_at: 2014-07-03 18:54:15
+  returned_at: 2014-07-03 18:54:15
+  cancelled: false
+  hours_charged: 9.99
+
+two:
+  name: MyString
+  address: MyString
+  phone: MyString
+  start_at: 2014-07-03 18:54:15
+  end_at: 2014-07-03 18:54:15
+  delivered_at: 2014-07-03 18:54:15
+  returned_at: 2014-07-03 18:54:15
+  cancelled: false
+  hours_charged: 9.99

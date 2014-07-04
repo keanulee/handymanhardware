@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1><%= @rentable.name %></h1>
+</p>
+
+<p>
+  <img src="<%= @rentable.image %>" alt="<%= @rentable.name %>" />
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @rentable.description %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @rentable.location %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @rentable.quantity %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @rentable.category %>
+</p>
+
+<p>
+  <%= link_to 'Rent Me', new_transaction_path(transaction: { rentable_ids: [@rentable.id] }) %>
+</p>
+
+<%= link_to 'Edit', edit_rentable_path(@rentable) %> |
+<%= link_to 'Back', rentables_path %>

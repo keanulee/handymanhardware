@@ -1,0 +1,34 @@
+<h1>Listing rentables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Quantity</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rentables.each do |rentable| %>
+      <tr>
+        <td><%= link_to rentable.name, rentable %></td>
+        <td><%= link_to image_tag(rentable.image, alt: rentable.name), rentable %></td>
+        <td><%= rentable.description %></td>
+        <td><%= rentable.location %></td>
+        <td><%= rentable.quantity %></td>
+        <td><%= rentable.category %></td>
+        <td><%= link_to 'Edit', edit_rentable_path(rentable) %></td>
+        <td><%= link_to 'Destroy', rentable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rentable', new_rentable_path %>

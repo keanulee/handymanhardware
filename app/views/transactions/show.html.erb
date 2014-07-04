@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @transaction.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @transaction.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @transaction.phone %>
+</p>
+
+<p>
+  <strong>Start at:</strong>
+  <%= @transaction.start_at %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @transaction.end_at %>
+</p>
+
+<p>
+  <strong>Delivered at:</strong>
+  <%= @transaction.delivered_at %>
+</p>
+
+<p>
+  <strong>Returned at:</strong>
+  <%= @transaction.returned_at %>
+</p>
+
+<p>
+  <strong>Cancelled:</strong>
+  <%= @transaction.cancelled %>
+</p>
+
+<p>
+  <strong>Hours charged:</strong>
+  <%= @transaction.hours_charged %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>
