@@ -15,6 +15,9 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new(transaction_params)
+    @transaction.start_at = DateTime.tomorrow.to_date + 12.hours
+    # @transaction.start_at.hour = 12
+    @transaction.end_at = @transaction.start_at + 2.days
   end
 
   # GET /transactions/1/edit

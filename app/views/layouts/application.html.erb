@@ -8,9 +8,59 @@
 </head>
 <body>
 
-<%= link_to image_tag("http://apluspainting.yolasite.com/resources/handymanLogo.jpg", class: "logo", alt: "Handyman Hardware"), root_path %>
+  <header class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-7">
+        <%= link_to image_tag('handymanLogo.jpg', alt: 'Handyman Hardware'), root_path %>
+      </div>
+      <div class="col-sm-6 col-md-5">
+        <%= form_tag root_path, method: 'get', class: 'form-inline' do %>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><span class="fa fa-search"></span></div>
+              <%= search_field_tag :q, params[:q], class: 'form-control' %>
+              <span class="input-group-btn">
+                <%= submit_tag 'Search', class: 'btn btn-warning' %>
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </header>
 
-<%= yield %>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Locations and Hours</a></li>
+          <li><a href="#">Shop Online</a></li>
+          <li class="active"><a href="/">
+            Equipment Rentals <span class="label label-danger">New</span>
+          </a></li>
+        </ul>
+    </div>
+  </nav>
 
+  <section class="container">
+    <% if notice %>
+      <div class="alert alert-warning" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <%= notice %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </section>
+
+  <footer class="container">
+    <div class="well">
+      <p>
+        &copy; <%= DateTime.now.year %> Handyman Hardware
+      </p>
+    </div>
+  </footer>
 </body>
 </html>

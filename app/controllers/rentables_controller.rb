@@ -4,7 +4,7 @@ class RentablesController < ApplicationController
   # GET /rentables
   # GET /rentables.json
   def index
-    @rentables = Rentable.all
+    @rentables = params[:q] ? Rentable.where(['name LIKE ?', "%#{params[:q]}%"]) : Rentable.all
   end
 
   # GET /rentables/1

@@ -1,41 +1,57 @@
-<%= form_for(@rentable) do |f| %>
+<%= form_for(@rentable, html: { class: 'form-horizontal' }) do |f| %>
   <% if @rentable.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rentable.errors.count, "error") %> prohibited this rentable from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@rentable.errors.count, "Error") %></strong>
       <ul>
-      <% @rentable.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <% @rentable.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
+  <div class="form-group">
+    <%= f.label :image, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :image, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+  <div class="form-group">
+    <%= f.label :description, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
+  <div class="form-group">
+    <%= f.label :location, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :location, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
+  <div class="form-group">
+    <%= f.label :quantity, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.number_field :quantity, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.text_field :category %>
+  <div class="form-group">
+    <%= f.label :category, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :category, class: 'form-control' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: 'btn btn-warning' %>
+      <% if !@rentable.new_record? %>
+        <%= link_to 'Destroy', @rentable, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
   </div>
 <% end %>

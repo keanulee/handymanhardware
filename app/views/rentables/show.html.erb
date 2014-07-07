@@ -1,36 +1,22 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @rentable.name %></h1>
+
+<%= image_tag(@rentable.image, alt: @rentable.name) %><br />
 
 <p>
-  <h1><%= @rentable.name %></h1>
+  <%= link_to 'Rent Now', new_transaction_path(transaction: { rentable_ids: [@rentable.id] }), class: 'btn btn-warning' %>
 </p>
 
 <p>
-  <img src="<%= @rentable.image %>" alt="<%= @rentable.name %>" />
-</p>
-
-<p>
-  <strong>Description:</strong>
   <%= @rentable.description %>
 </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @rentable.location %>
-</p>
+<dl class="dl-horizontal">
+  <dt>Location</dt>
+  <dd><%= @rentable.location %></dd>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @rentable.quantity %>
-</p>
+  <dt>Quantity</dt>
+  <dd><%= @rentable.quantity %></dd>
 
-<p>
-  <strong>Category:</strong>
-  <%= @rentable.category %>
-</p>
-
-<p>
-  <%= link_to 'Rent Me', new_transaction_path(transaction: { rentable_ids: [@rentable.id] }) %>
-</p>
-
-<%= link_to 'Edit', edit_rentable_path(@rentable) %> |
-<%= link_to 'Back', rentables_path %>
+  <dt>Category</dt>
+  <dd><%= @rentable.category %></dd>
+</dl>
