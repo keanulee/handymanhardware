@@ -1,13 +1,22 @@
-<h1>Rental Confirmation</h1>
+
+<% if @transaction.hours_charged %>
+  <h1>Rental Receipt</h1>
+<% else %>
+  <h1>Rental Confirmation</h1>
+<% end %>
 
 <div class="well product-form-list">
   <div class="row">
     <% for rentable in @transaction.rentables %>
       <label class="col-xs-6 col-sm-3 col-lg-2 rentable-item">
+        <%= rentable.name %> (<%= link_to 'Details', rentable, target: '_blank' %>)
         <div class="image-container">
           <%= image_tag rentable.image, alt: rentable.name %>
         </div>
-        <%= rentable.name %> (<%= link_to 'Details', rentable, target: '_blank' %>)
+        <h4>
+          <%= number_to_currency rentable.hourly_rate %>
+          <small>per hour</small>
+        </h4>
       </label>
     <% end %>
   </div>
@@ -23,14 +32,53 @@
   <dt>Address:</dt>
   <dd><%= @transaction.address %></dd>
 
+  <dt>City:</dt>
+  <dd><%= @transaction.city %></dd>
+
+  <dt>Province:</dt>
+  <dd><%= @transaction.province %></dd>
+
+  <dt>Postal code:</dt>
+  <dd><%= @transaction.postal_code %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @transaction.email %></dd>
+
   <dt>Phone:</dt>
   <dd><%= @transaction.phone %></dd>
 
   <dt>Start at:</dt>
-  <dd><%= datetimetext(@transaction.start_at) %></dd>
+  <dd><%= datetimetext @transaction.start_at %></dd>
 
   <dt>End at:</dt>
-  <dd><%= datetimetext(@transaction.end_at) %></dd>
+  <dd><%= datetimetext @transaction.end_at %></dd>
+
+  <dt>Delivered at:</dt>
+  <dd><%= datetimetext @transaction.delivered_at %></dd>
+
+  <dt>Returned at:</dt>
+  <dd><%= datetimetext @transaction.returned_at %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <% if @transaction.hours_charged %>
+    <dt>Hours charged:</dt>
+    <dd><%= @transaction.hours_charged %></dd>
+  <% else %>
+    <dt>Estimated hours:</dt>
+    <dd><%= @transaction.estimated_hours %></dd>
+  <% end %>
+
+  <dt>Hourly rate:</dt>
+  <dd><%= number_to_currency @transaction.hourly_rate %></dd>
+
+  <% if @transaction.hours_charged %>
+    <dt>Subtotal:</dt>
+    <dd><%= number_to_currency @transaction.subtotal %></dd>
+  <% else %>
+    <dt>Estimated subtotal:</dt>
+    <dd><%= number_to_currency @transaction.estimated_subtotal %></dd>
+  <% end %>
 </dl>
 
 <%= link_to 'Back to Homepage', root_path %>

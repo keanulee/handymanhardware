@@ -17,11 +17,15 @@
     <div class="row">
       <% for rentable in Rentable.all %>
         <label class="col-xs-6 col-sm-3 col-lg-2 rentable-item">
+          <%= check_box_tag "transaction[rentable_ids][]", rentable.id, @transaction.rentables.include?(rentable) %>
+          <%= rentable.name %> (<%= link_to 'Details', rentable, target: '_blank' %>)
           <div class="image-container">
             <%= image_tag rentable.image, alt: rentable.name %>
           </div>
-          <%= check_box_tag "transaction[rentable_ids][]", rentable.id, @transaction.rentables.include?(rentable) %>
-          <%= rentable.name %> (<%= link_to 'Details', rentable, target: '_blank' %>)
+          <h4>
+            <%= number_to_currency rentable.hourly_rate %>
+            <small>per hour</small>
+          </h4>
         </label>
       <% end %>
     </div>
@@ -43,6 +47,30 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :city, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :city, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :province, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :province, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :postal_code, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :postal_code, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :phone, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
       <%= f.text_field :phone, class: 'form-control' %>
@@ -51,13 +79,19 @@
   <div class="form-group">
     <%= f.label :start_at, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= datetimepicker(f, :start_at) %>
+      <div class="input-group">
+        <%= datetimepicker f, :start_at %>
+        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+      </div>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :end_at, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= datetimepicker(f, :end_at) %>
+      <div class="input-group">
+        <%= datetimepicker f, :end_at %>
+        <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+      </div>
     </div>
   </div>
 
@@ -65,13 +99,19 @@
     <div class="form-group">
       <%= f.label :delivered_at, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
-        <%= datetimepicker(f, :delivered_at) %>
+        <div class="input-group">
+          <%= datetimepicker f, :delivered_at %>
+          <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :returned_at, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
-        <%= datetimepicker(f, :returned_at) %>
+        <div class="input-group">
+          <%= datetimepicker f, :returned_at %>
+          <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -84,6 +124,36 @@
       <%= f.label :hours_charged, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
         <%= f.text_field :hours_charged %>
+      </div>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="credit_card">Credit card</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="credit_card" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="cvv">CVV</label>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-xs-2">
+            <input class="form-control" id="cvv" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="expiry">Expiry date</label>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-xs-2">
+            <input class="form-control" id="expiry" type="text" placeholder="MM">
+          </div>
+          <div class="col-xs-2">
+            <input class="form-control" type="text" placeholder="YY">
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

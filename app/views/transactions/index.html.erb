@@ -1,9 +1,10 @@
+<h2>Rental Transactions</h2>
+
 <table class="table">
   <thead>
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Phone</th>
       <th>Start at</th>
       <th>End at</th>
       <th>Delivered at</th>
@@ -19,16 +20,46 @@
       <tr>
         <td><%= transaction.id %></td>
         <td><%= transaction.name %></td>
-        <td><%= transaction.phone %></td>
-        <td><%= datetimetext(transaction.start_at) %></td>
-        <td><%= datetimetext(transaction.end_at) %></td>
-        <td><%= datetimetext(transaction.delivered_at) %></td>
-        <td><%= datetimetext(transaction.returned_at) %></td>
-        <td><%= booleantext(transaction.cancelled) %></td>
+        <td><%= datetimetext transaction.start_at %></td>
+        <td><%= datetimetext transaction.end_at %></td>
+        <td><%= datetimetext transaction.delivered_at %></td>
+        <td><%= datetimetext transaction.returned_at %></td>
+        <td><%= booleantext transaction.cancelled %></td>
         <td><%= transaction.hours_charged %></td>
+        <td><%= link_to 'Show', transaction_path(transaction) %></td>
         <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<h2>Rentable Items</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Location</th>
+      <th>Category</th>
+      <th>Hourly Rate</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Rentable.all.each do |rentable| %>
+      <tr>
+        <td><%= rentable.name %></td>
+        <td><%= rentable.quantity %></td>
+        <td><%= rentable.location %></td>
+        <td><%= rentable.category %></td>
+        <td><%= number_to_currency rentable.hourly_rate %></td>
+        <td><%= link_to 'Show', rentable_path(rentable) %></td>
+        <td><%= link_to 'Edit', edit_rentable_path(rentable) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Rentable', new_rentable_path, class: 'btn btn-warning' %>

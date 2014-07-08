@@ -1,9 +1,14 @@
 <h1><%= @rentable.name %></h1>
 
-<%= image_tag(@rentable.image, alt: @rentable.name) %><br />
+<%= image_tag(@rentable.image, alt: @rentable.name, class: 'big-image') %><br />
+
+<h2>
+    <%= number_to_currency @rentable.hourly_rate %>
+    <small>per hour</small>
+</h2>
 
 <p>
-  <%= link_to 'Rent Now', new_transaction_path(transaction: { rentable_ids: [@rentable.id] }), class: 'btn btn-warning' %>
+  <%= link_to 'Rent It Now', new_transaction_path(transaction: { rentable_ids: [@rentable.id] }), class: 'btn btn-warning' %>
 </p>
 
 <p>

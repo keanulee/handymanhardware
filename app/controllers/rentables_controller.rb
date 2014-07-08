@@ -4,7 +4,7 @@ class RentablesController < ApplicationController
   # GET /rentables
   # GET /rentables.json
   def index
-    @rentables = params[:q] ? Rentable.where(['name LIKE ?', "%#{params[:q]}%"]) : Rentable.all
+    @rentables = params[:q] ? Rentable.where(['LOWER(name) LIKE ?', "%#{params[:q].downcase}%"]) : Rentable.all
   end
 
   # GET /rentables/1
@@ -69,6 +69,6 @@ class RentablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rentable_params
-      params.require(:rentable).permit(:name, :image, :description, :location, :quantity, :category)
+      params.require(:rentable).permit(:name, :image, :description, :location, :quantity, :category, :hourly_rate)
     end
 end

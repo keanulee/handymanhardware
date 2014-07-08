@@ -19,7 +19,11 @@
       <p>
         <%= rentable.description %>
       </p>
-      <%= link_to 'Rent Now', new_transaction_path(transaction: { rentable_ids: [rentable.id] }), class: 'btn btn-warning' %>
+      <h4>
+        <%= number_to_currency rentable.hourly_rate %>
+        <small>per hour</small>
+      </h4>
+      <%= link_to 'Rent It Now', new_transaction_path(transaction: { rentable_ids: [rentable.id] }), class: 'btn btn-warning' %>
     </div>
   <% end %>
 </div>
