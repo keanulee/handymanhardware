@@ -1,3 +1,5 @@
+<h1>Rental Confirmation</h1>
+
 <div class="well product-form-list">
   <div class="row">
     <% for rentable in @transaction.rentables %>
@@ -12,6 +14,9 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt>Rental ID:</dt>
+  <dd><%= @transaction.id %></dd>
+
   <dt>Name:</dt>
   <dd><%= @transaction.name %></dd>
 
@@ -26,19 +31,6 @@
 
   <dt>End at:</dt>
   <dd><%= datetimetext(@transaction.end_at) %></dd>
-
-  <dt>Delivered at:</dt>
-  <dd><%= datetimetext(@transaction.delivered_at) %></dd>
-
-  <dt>Returned at:</dt>
-  <dd><%= datetimetext(@transaction.returned_at) %></dd>
-
-  <dt>Cancelled:</dt>
-  <dd><%= booleantext(@transaction.cancelled) %></dd>
-
-  <dt>Hours charged:</dt>
-  <dd><%= @transaction.hours_charged %></dd>
 </dl>
 
-<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<%= link_to 'Back to Homepage', root_path %>
