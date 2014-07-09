@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708020613) do
+ActiveRecord::Schema.define(version: 20140708235012) do
 
   create_table "rentables", force: true do |t|
     t.string   "name"
     t.string   "image"
-    t.string   "description"
+    t.text     "description"
     t.string   "location"
     t.integer  "quantity"
     t.string   "category"

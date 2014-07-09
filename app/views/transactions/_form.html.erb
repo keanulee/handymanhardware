@@ -17,11 +17,12 @@
     <div class="row">
       <% for rentable in Rentable.all %>
         <label class="col-xs-6 col-sm-3 col-lg-2 rentable-item">
-          <%= check_box_tag "transaction[rentable_ids][]", rentable.id, @transaction.rentables.include?(rentable) %>
-          <%= rentable.name %> (<%= link_to 'Details', rentable, target: '_blank' %>)
+          <%= check_box_tag "transaction[rentable_ids][]", rentable.id, @transaction.rentables.include?(rentable), 'data-hourly-rate' => rentable.hourly_rate %>
+          <div class="rentable-name"><%= rentable.name %></div>
           <div class="image-container">
             <%= image_tag rentable.image, alt: rentable.name %>
           </div>
+          (<%= link_to 'Details', rentable, target: '_blank' %>)
           <h4>
             <%= number_to_currency rentable.hourly_rate %>
             <small>per hour</small>
@@ -94,39 +95,26 @@
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Estimated hours</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"><span class="estimated-hours">0</span></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Hourly rate</label>
+    <div class="col-sm-10">
+      <p class="form-control-static">$<span class="hourly-rate">0.00</span></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Estimated subtotal</label>
+    <div class="col-sm-10">
+      <p class="form-control-static">$<span class="estimated-subtotal">0.00</span></p>
+    </div>
+  </div>
 
-  <% if !@transaction.new_record? %>
-    <div class="form-group">
-      <%= f.label :delivered_at, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-10">
-        <div class="input-group">
-          <%= datetimepicker f, :delivered_at %>
-          <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :returned_at, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-10">
-        <div class="input-group">
-          <%= datetimepicker f, :returned_at %>
-          <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :cancelled, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-10">
-        <%= f.check_box :cancelled %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :hours_charged, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-10">
-        <%= f.text_field :hours_charged %>
-      </div>
-    </div>
-  <% else %>
+  <% if @transaction.new_record? %>
     <div class="form-group">
       <label class="col-sm-2 control-label" for="credit_card">Credit card</label>
       <div class="col-sm-10">
@@ -154,6 +142,43 @@
             <input class="form-control" type="text" placeholder="YY">
           </div>
         </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <%= f.label :delivered_at, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <%= datetimepicker f, :delivered_at %>
+          <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :returned_at, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <%= datetimepicker f, :returned_at %>
+          <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :cancelled, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.check_box :cancelled %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :hours_charged, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.number_field :hours_charged, step: 'any', min: 0 %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Subtotal</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">$<span class="subtotal">0.00</span></p>
       </div>
     </div>
   <% end %>

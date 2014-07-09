@@ -5,6 +5,11 @@
 .product-form-list {
     background-color: #FFF;
 
+    .rentable-name {
+        height: 40px;
+        overflow: hidden;
+    }
+
     .image-container {
         height: 150px;
         text-align: center;

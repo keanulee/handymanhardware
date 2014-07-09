@@ -5,6 +5,13 @@ class Transaction < ActiveRecord::Base
   validates_format_of :email, with: /\A[^@]+@[^@]+\.[^@]+\Z/
   validates_format_of :postal_code, with: /\A[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d\Z/
   validates_format_of :phone, with: /\A\+?1?(\D*\d){10}\D*\Z/
+  validate :start_at_before_end_at
+
+  def start_at_before_end_at
+    if start_at >= end_at
+      errors.add(:start_at, 'should be before end at')
+    end
+  end
 
   def hourly_rate
     rentables.sum(:hourly_rate).to_f
